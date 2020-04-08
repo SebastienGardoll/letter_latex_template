@@ -1,0 +1,121 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: Sébastien Gardoll copyright all rights reserved %
+% email: sebastien@gardoll.fr                             %
+% LaTeX Project Public License 1.3c                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[french,article,12pt,a4paper,oneside,final]{memoir}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FONTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% XeLateX/ LuaLateX font selection package.
+\usepackage{fontspec}
+
+% Document font.
+\setmainfont{Liberation Serif}
+
+% Localisation.
+% french referes to frenchb ; frenchb and francais are deprecated.
+% babel fully supportes LuaLateX ; polyglossia doesn't fully support LuaLateX.
+\usepackage[french]{babel}
+
+% None breakable spaces for the french quote symboles.
+\frenchbsetup{og=«, fg=»}
+
+% Micro-typographical adjustments.
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Additional length to the spin margin.
+% Instruction after stock and trim size and
+% before margin definitions.
+\setbinding{0mm}
+
+% Define the spine and edge margins.
+% Margins are always adujsted (see checkandfixthelayout algorithm and log).
+%                     spin  edge
+\setlrmarginsandblock{25mm}{25mm}{*}
+
+% Define the upper and lower margins.
+% Margins are always adujsted (see checkandfixthelayout algorithm and log).
+%                      up   down
+\setulmarginsandblock{25mm}{25mm}{*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PARAGRAPH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Paragraph indentation.
+\setlength{\parindent}{1em}
+
+% Set the paragraph spacing.
+\setlength{\parskip}{8pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HYPERLINK %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{color}
+\definecolor{mygray}{gray}{0} % 0 for black ; 1 for white.
+\usepackage[colorlinks=true,urlcolor=mygray,luatex]{hyperref}
+\urlstyle{rm} % Remove the URL special font and use the document font.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% OTHERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{graphicx} % Enable insertion of image (signature)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Layout validation.
+\settypeoutlayoutunit{mm} % Ouput the layout lenghts in milimeters.
+\checkandfixthelayout[classic]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LETTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{empty} % No foot page number.
+
+\begin{document}
+%
+%%% Recipient alignment %%%
+\newlength{\spacer}
+\def\longestline{PO BOX Town CEDEX xx}
+\newlength{\linelength}
+\settowidth{\linelength}{\longestline}
+\addtolength{\spacer}{\textwidth}
+\addtolength{\spacer}{-\linelength}
+% FROM
+\noindent
+\begin{minipage}[t]{\textwidth}
+\raggedright
+The Author's firstname and lastname\\
+The Author's address\\
+PO BOX Town\\
+The author's email address\\
+\end{minipage}
+% TO
+\begin{minipage}[t]{\textwidth}
+\hspace*{\spacer}Institut\\ % Do not use tabulation here otherwise it adds vertical sapce.
+\hspace*{\spacer}Service\\% space before and after (paragraph).
+\hspace*{\spacer}street\\
+\hspace*{\spacer}\longestline
+\vspace*{1cm}
+\end{minipage}
+% OBJECT
+\textit{Object : the subject of the letter.\\}
+\textit{Reference : any reference to recall}
+\vspace{0.5cm}\\
+\hspace*{\spacer}Town, le \today
+\vspace{0.5cm}\\
+% BODY
+\indent Dear Ms./Mr.,
+
+The body of the letter.
+
+Best regards or any other things nice to say.
+\vspace*{1cm}\\
+\begin{flushright}
+\includegraphics[scale=1]{resources/signature.png}
+\vspace*{0.5cm}\\
+The Author's firstname and lastname
+\end{flushright}
+\vfill
+\end{document}
